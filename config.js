@@ -2,8 +2,8 @@
 // Tüm uygulama ayarları burada
 
 export const CONFIG = {
-  // Backend API URL - Yerel ağdaki IP adresinizi kullanın
-  API_BASE_URL: 'http://192.168.18.10:8082',
+  // Backend API URL - Production Render URL
+  API_BASE_URL: 'https://evimai-1.onrender.com',
 
   // Adapty SDK Key (Demo için mock kullanılıyor)
   ADAPTY_KEY: 'public_live_klbC1jyp.nGWPMOKr5TImTmpHhmh1',
