@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "EvimAI-Native",
-    "slug": "EvimAI-Native",
+    "name": "EvimAI",
+    "slug": "evimai",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -10,12 +10,14 @@
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#6C63FF"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.evimai.app"
     },
     "android": {
+      "package": "com.evimai.app",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -24,6 +26,16 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      "react-native-vision-camera",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "EvimAI'nin evinizi tasarlaması için fotoğraflara erişim gerekiyor.",
+          "cameraPermission": "EvimAI'nin fotoğraf çekmesi için kamera erişimi gerekiyor."
+        }
+      ]
+    ]
   }
 }

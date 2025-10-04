@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: evimai-backend
+    runtime: node
+    env: node
+    region: frankfurt
+    plan: free
+    buildCommand: cd backend && npm install
+    startCommand: node backend/server.js
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: FAL_API_KEY
+        sync: false
+      - key: PORT
+        value: 8082
+    autoDeploy: true
