@@ -15,7 +15,18 @@ import {
   Modal
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-// import { adapty } from 'react-native-adapty'; // Expo Go için devre dışı
+// Adapty - Only works in native builds, not Expo Go
+let adapty = null;
+try {
+  adapty = require('react-native-adapty').adapty;
+} catch (e) {
+  console.log('⚠️ Adapty not available in Expo Go - using mock for development');
+  adapty = {
+    activate: () => Promise.resolve(),
+    getPaywall: () => Promise.resolve({ products: [] }),
+    makePurchase: () => Promise.resolve({ accessLevels: {} })
+  };
+}
 import * as ImagePicker from 'expo-image-picker';
 import * as FileSystem from 'expo-file-system/legacy';
 import { AdaptyPaywallDemo } from './adapty-demo';
@@ -25,14 +36,6 @@ import { ProfileScreen } from './screens/ProfileScreen';
 import { HistoryScreen } from './screens/HistoryScreen';
 
 const { width, height } = Dimensions.get('window');
-
-// Mock Adapty - Expo Go uyumlu
-const adapty = {
-  activate: () => console.log('🎭 Mock Adapty activated'),
-  getPaywall: () => Promise.resolve({ products: [] }),
-  getPaywallProducts: () => Promise.resolve([]),
-  makePurchase: () => Promise.resolve({ accessLevels: { premium: { isActive: true } } })
-};
 
 // Onboarding Flow Component
 const OnboardingFlow = ({ onComplete }) => {
@@ -287,26 +290,7 @@ const CameraScreen = ({ navigation }) => {
 
     } catch (error) {
       console.error('❌ Real AI Error:', error.message);
-      console.log('🎭 Switching to DEMO MODE...');
-      // Alert.alert("Hata", `AI işlemi başarısız: ${error.message}`); // REMOVED - silent fallback
-
-      // Fallback to demo mode if API fails
-      const fallbackResult = {
-        id: Date.now(),
-        timestamp: new Date(),
-        original: imageUri,
-        processed: imageUri,
-        mode: selectedMode,
-        confidence: 0.5,
-        features: ['Demo Mode (API Failed)'],
-        description: 'Demo modunda çalışıyor',
-        demo: true,
-        error: error.message
-      };
-
-      setResult(fallbackResult);
-      setProcessingHistory(prev => [fallbackResult, ...prev]);
-    } finally {
+      Alert.alert("Hata", `AI işlemi başarısız: ${error.message}\n\nLütfen tekrar deneyin veya internet bağlantınızı kontrol edin.`);
       setIsProcessing(false);
     }
   };

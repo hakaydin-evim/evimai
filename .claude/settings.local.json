@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(redis-cli:*)",
+      "Bash(docker run:*)",
+      "Bash(wsl:*)",
+      "Bash(node server.js)",
+      "Bash(curl:*)",
+      "Bash(npx expo start:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

@@ -5,7 +5,7 @@ export const CONFIG = {
   // Backend API URL - Production Render URL
   API_BASE_URL: 'https://evimai-1.onrender.com',
 
-  // Adapty SDK Key (Demo için mock kullanılıyor)
+  // Adapty SDK Key - Real Production Key
   ADAPTY_KEY: 'public_live_klbC1jyp.nGWPMOKr5TImTmpHhmh1',
 
   // Free tier settings
